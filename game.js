@@ -58,7 +58,7 @@ function startGameLoop() {
     intervalID = setInterval(gameLoop, 1000 / speed);
     isGameRunning = true;
     isGameStarted = true;
-    updateGameStatusDisplay("");  // Effacer le statut quand le jeu est démarré
+    updateGameStatusDisplay("");
 }
 
 function pauseGameLoop() {
@@ -87,7 +87,7 @@ function showPseudoModal() {
     const submitPseudoButton = document.getElementById('submitPseudo');
     submitPseudoButton.onclick = () => {
         const playerPseudo = document.getElementById('playerPseudo').value;
-        const pseudoRegex = /^[a-zA-Z0-9_-]{6,20}$/; // Regular expression for validating the pseudo
+        const pseudoRegex = /^[a-zA-Z0-9_-]{6,20}$/;
 
         if (pseudoRegex.test(playerPseudo)) {
             scoreboard.addNewScore(playerPseudo, currentScore);
@@ -127,22 +127,18 @@ function resetGame() {
     updateGameStatusDisplay("");
 }
 
-// Gestion des événements pour contrôler la direction du serpent et pour alterner entre pause et jeu avec la touche espace
 document.addEventListener('keydown', (event) => {
     const { key } = event;
 
-    // Empêche les touches fléchées de faire défiler la page
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(key)) {
         event.preventDefault();
     }
 
-    // Gestion de la direction du serpent
     if (isGameRunning) {
         snake.changeDirection(key);
     }
 });
 
-// Gestion des événements pour les boutons de contrôle de la vitesse
 document.getElementById('increaseSpeed').addEventListener('click', () => {
     speed++;
     updateSpeedDisplay();
@@ -161,15 +157,12 @@ document.getElementById('decreaseSpeed').addEventListener('click', () => {
     }
 });
 
-// Gestion des événements pour le bouton Start
 document.getElementById('startGame').addEventListener('click', () => {
     startGameLoop();
-    // Cache le bouton Start après le démarrage du jeu
     const startGameButton = document.getElementById('startGame');
     startGameButton.classList.add('hidden');
 });
 
-// Assurer que l'événement est ajouté une seule fois pour le bouton Recommencer
 document.getElementById('restartGame').addEventListener('click', resetGame);
 
 fruit.reposition();

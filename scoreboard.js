@@ -47,7 +47,6 @@ export default class Scoreboard {
     }
 
     addNewScore(name, score) {
-        // Vérifier si le nom existe déjà
         const existingScoreIndex = this.scores.findIndex(s => s.name === name);
         
         if (existingScoreIndex !== -1) {
