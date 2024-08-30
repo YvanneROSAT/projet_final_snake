@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jeu de Snake</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="game.js" defer></script>
+  </head>
+  <body class="bg-gray-900 text-white">
+    <div class="container mx-auto p-4 flex justify-between">
+      <!-- Scores des joueurs -->
+      <div class="w-1/4">
+        <div
+          id="scoreboard"
+          class="bg-gray-800 rounded-lg shadow-lg p-4 overflow-y-auto max-h-screen"
+        >
+          <h2 class="text-xl font-bold mb-2">Meilleurs scores</h2>
+          <ol id="score-list" class="list-decimal list-inside"></ol>
+        </div>
+      </div>
+
+      <!-- Plateau du jeu -->
+      <div class="flex flex-col items-center">
+        <h1 class="text-center text-3xl mb-4">Jeu de Snake</h1>
+        <canvas
+          id="gameCanvas"
+          width="400"
+          height="400"
+          class="block mb-4 border border-white"
+        ></canvas>
+
+        <!-- Boutons de contrôle -->
+        <div class="text-center mb-4">
+          <button
+            id="startGame"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+          >
+            Start
+          </button>
+          <button
+            id="restartGame"
+            class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded mr-2 hidden"
+          >
+            Recommencer
+          </button>
+          <button
+            id="increaseSpeed"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+          >
+            Augmenter la Vitesse
+          </button>
+          <button
+            id="decreaseSpeed"
+            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Diminuer la Vitesse
+          </button>
+        </div>
+
+        <!-- Affichage de la vitesse actuelle et le score-->
+        <div class="text-center mb-4">
+          <span>Vitesse actuelle: </span><span id="currentSpeed">1</span><br />
+          <span>Score actuel: </span><span id="currentScore">0</span><br />
+        </div>
+      </div>
+
+      <!-- Règles du jeu -->
+      <div class="w-1/4">
+        <div
+          class="bg-gray-800 rounded-lg shadow-lg p-4 overflow-y-auto max-h-screen"
+        >
+          <h2 class="text-xl font-bold mb-2">Règles du Jeu</h2>
+          <ul class="list-disc list-inside">
+            <li>Le corps suit la tête du serpent.</li>
+            <li>
+              Si le serpent mange un fruit, le corps grandit de 1 et on marque
+              10 points.
+            </li>
+            <li>Si la tête touche le corps, c'est perdu.</li>
+            <li>
+              Le plateau est un donut : le haut communique avec le bas, la
+              gauche avec la droite.
+            </li>
+            <li>
+              Lorsque la partie est terminée, affichez le tableau des 20
+              meilleurs scores.
+            </li>
+            <li>
+              Si le joueur entre dans le top 20, un formulaire pour entrer le
+              pseudo (minimum 6 caractères, maximum 20) s'affiche.
+            </li>
+            <li>
+              Le tableau des scores sera initialisé avec des données d'une API
+              si vide.
+            </li>
+            <li>Les scores sont conservés dans le stockage local.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulaire pour entrer le pseudo -->
+    <div
+      id="pseudoModal"
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden"
+    >
+      <div class="bg-gray-800 p-6 rounded-lg">
+        <h2 class="text-xl font-bold mb-4">Entrez votre pseudo</h2>
+        <input
+          type="text"
+          id="playerPseudo"
+          placeholder="Pseudo (6-20 caractères)"
+          class="bg-gray-700 text-white p-2 rounded mb-4 w-full"
+        />
+        <button
+          id="submitPseudo"
+          class="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Valider
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
